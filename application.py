@@ -1,14 +1,14 @@
-"""
-This script runs the FlaskTemplate application using a development server.
-"""
+from flask import Flask
+app = Flask(__name__)
+# Defining the home page of our site
+@app.route("/")  # this sets the route to this page
+def home():
+	return "Hello! this is the main page <h1>HELLO</h1>"  # some basic inline html
 
-from os import environ
-from FlaskTemplate import app
+@app.route("/<name>")
+def user(name):
+    return f"Hello {name}!"
+	
 
-if __name__ == '__main__':
-    HOST = environ.get('SERVER_HOST', 'localhost')
-    try:
-        PORT = int(environ.get('SERVER_PORT', '3000'))
-    except ValueError:
-        PORT = 3000
-    app.run(HOST, PORT)
+if __name__ == "__main__":
+    app.run()
